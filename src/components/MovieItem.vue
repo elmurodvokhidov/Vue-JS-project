@@ -1,7 +1,8 @@
 <template>
-    <li class="list-group-item d-flex justify-content-between">
-        <span class="list-group-item-label">Man in Black</span>
-        <input type="text" class="list-group-item-input" defaultValue="998">
+    <li class="list-group-item d-flex justify-content-between"
+        :class="[{ like: property.like }, { favorite: property.favorite }]">
+        <span class="list-group-item-label">{{ property.name }}</span>
+        <input type="text" class="list-group-item-input" :value="property.view">
         <div class="d-flex justify-content-center align-items-center">
             <button class="btn-cookie btn-sm" type="button"><i class="fas fa-cookie"></i></button>
             <button class="btn-trash btn-sm" type="button"><i class="fas fa-trash"></i></button>
@@ -11,7 +12,12 @@
 </template>
 <script>
 export default {
-
+    props: {
+        property: {
+            type: Object,
+            required: true,
+        }
+    }
 }
 </script>
 <style scoped>
@@ -21,15 +27,18 @@ export default {
     background-color: rgba(255, 255, 255, 0);
     border-bottom: 1px solid black;
 }
+
 .list-group-item:last-child {
     border-bottom: none;
 }
+
 .list-group-item span {
     width: 550px;
     line-height: 35px;
     font-size: 20px;
     cursor: pointer;
 }
+
 .list-group-item input {
     line-height: 35px;
     font-size: 20px;
@@ -37,6 +46,7 @@ export default {
     outline: none;
     text-align: center;
 }
+
 .list-group-item button {
     width: 35px;
     height: 35px;
@@ -49,6 +59,7 @@ export default {
 .list-group-item .btn-cookie {
     color: #e09f3e;
 }
+
 .list-group-item .btn-trash {
     color: #e5383b;
 }
