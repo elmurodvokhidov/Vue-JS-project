@@ -8,30 +8,12 @@ import MovieItem from './MovieItem.vue';
 
 export default {
     components: { MovieItem },
-    data() {
-        return {
-            movies: [
-                {
-                    name: 'Man in black',
-                    view: 787,
-                    favorite: false,
-                    like: true,
-                },
-                {
-                    name: 'Titanic',
-                    view: 145,
-                    favorite: true,
-                    like: false,
-                },
-                {
-                    name: 'Avatar',
-                    view: 511,
-                    favorite: true,
-                    like: true,
-                },
-            ]
+    props: {
+        movies: {
+            type: Array,
+            required: true,
         }
-    },
+    }
 }
 </script>
 <style scoped>

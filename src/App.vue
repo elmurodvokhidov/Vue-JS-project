@@ -1,12 +1,12 @@
 <template>
   <div class="app font-monospace">
     <div class="content">
-      <AppInfo />
+      <AppInfo :barchaKinolar="movies.length" :watchedMovies="movies.filter(item => item.favorite).length" />
       <div class="searchPanel">
         <SearchPanel />
         <AppFilter />
       </div>
-      <MovieList />
+      <MovieList :movies="movies" />
       <MovieAddForm />
     </div>
   </div>
@@ -26,7 +26,32 @@ export default {
     AppFilter,
     MovieList,
     MovieAddForm,
-  }
+  },
+
+  data() {
+    return {
+      movies: [
+        {
+          name: 'Man in black',
+          view: 787,
+          favorite: true,
+          like: true,
+        },
+        {
+          name: 'Titanic',
+          view: 145,
+          favorite: true,
+          like: false,
+        },
+        {
+          name: 'Avatar',
+          view: 511,
+          favorite: true,
+          like: true,
+        },
+      ]
+    }
+  },
 }
 </script>
 

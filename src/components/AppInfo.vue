@@ -1,11 +1,24 @@
 <template>
     <div class="appInfo">
-        <p class="fs-3 text-uppercase">Barcha kinolar soni: 0</p>
-        <p class="fs-4 text-uppercase">Ko'rilgan kinolar soni: 0</p>
+        <p class="fs-3 text-uppercase">Barcha kinolar soni: {{ barchaKinolar }}</p>
+        <p class="fs-4 text-uppercase">Ko'rilgan kinolar soni: {{ watchedMovies }}</p>
     </div>
 </template>
 
-<script></script>
+<script>
+export default {
+    props: {
+        barchaKinolar: {
+            type: Number,
+            required: true,
+        },
+        watchedMovies: {
+            type: Number,
+            required: true,
+        }
+    }
+}
+</script>
 
 <style scoped>
 .appInfo {
