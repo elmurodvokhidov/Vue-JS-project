@@ -19,7 +19,11 @@ export default {
         }
     },
     methods: {
+        // Yangi ma'lumot qo'shish funksiyasi va propslar
         addItem() {
+            // Inputda ma'lumot bor ekanligini tekshirish
+            if (!this.name || !this.view) return
+            // Inputdan keladigan ma'lumotlarni saqlab turuvchi obyekt
             const newItem = {
                 name: this.name,
                 view: this.view,
@@ -27,6 +31,7 @@ export default {
                 like: false,
                 id: Date.now(),
             }
+            // parent componentiga child componentdan jo'natiladigan propslar
             this.$emit('createItem', newItem)
             this.name = ''
             this.view = ''

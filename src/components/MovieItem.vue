@@ -1,26 +1,34 @@
 <template>
     <li class="list-group-item d-flex justify-content-between"
         :class="[{ like: property.like }, { favorite: property.favorite }]">
+        <!-- Movie name -->
         <span @click="$emit('onToggle', { id: property.id, prop: 'like' })" class="list-group-item-label">{{ property.name
         }}</span>
+        <!-- Viewers -->
         <input type="text" class="list-group-item-input" :value="property.view">
         <div class="d-flex justify-content-center align-items-center">
+            <!-- Favorite button -->
             <button @click="$emit('onToggle', { id: property.id, prop: 'favorite' })" class="btn-cookie btn-sm"
                 type="button"><i class="fas fa-cookie"></i></button>
-            <button class="btn-trash btn-sm" type="button"><i class="fas fa-trash"></i></button>
+            <!-- Delete button -->
+            <button @click="$emit('onDelete', property.id)" class="btn-trash btn-sm" type="button"><i
+                    class="fas fa-trash"></i></button>
             <i class="fas fa-star"></i>
         </div>
     </li>
 </template>
 <script>
 export default {
+    // props xususiyatlari
     props: {
         property: {
             type: Object,
             required: true,
         }
     },
+    // Metodlar
     methods: {
+        // onLike funksiyasi
         onLike() {
             this.$emit('onLike', this.property.id)
         }

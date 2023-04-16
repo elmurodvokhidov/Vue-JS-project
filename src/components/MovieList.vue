@@ -1,7 +1,7 @@
 <template>
     <ul class="list-group movieList">
         <MovieItem v-for="(item, index) in movies" :key="item.id" v-bind:property="item"
-            @onToggle="$emit('onToggle', $event)" />
+            @onToggle="$emit('onToggle', $event)" @onDelete="$emit('onDelete', $event)" />
     </ul>
 </template>
 <script>

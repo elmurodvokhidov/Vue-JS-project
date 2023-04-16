@@ -6,13 +6,16 @@
         <SearchPanel />
         <AppFilter />
       </div>
-      <MovieList :movies="movies" @onToggle="onToggleHandler" />
+      <!-- Movie List componenti va undagi propslar -->
+      <MovieList :movies="movies" @onToggle="onToggleHandler" @onDelete="onDeleteHandler" />
+      <!-- Movie Add Form componenti va undagi propslar -->
       <MovieAddForm @createItem="createItem" />
     </div>
   </div>
 </template>
 
 <script>
+// Componentlarni import qilish
 import AppInfo from "@/components/AppInfo.vue";
 import SearchPanel from "@/components/SearchPanel.vue";
 import AppFilter from "@/components/AppFilter.vue";
@@ -20,6 +23,7 @@ import MovieList from "@/components/MovieList.vue";
 import MovieAddForm from "@/components/MovieAddForm.vue";
 
 export default {
+  // Barcha componentlar
   components: {
     AppInfo,
     SearchPanel,
@@ -28,6 +32,7 @@ export default {
     MovieAddForm,
   },
 
+  // Barcha ma'lumotlarni saqlab turuvchi storage
   data() {
     return {
       movies: [
@@ -57,9 +62,11 @@ export default {
   },
 
   methods: {
+    // Yangi ma'lumot qo'shish funksiyasi
     createItem(item) {
       this.movies.push(item);
     },
+    // onLike va onFavorite funksiyasi
     onToggleHandler({ id, prop }) {
       this.movies = this.movies.map(item => {
         if (item.id == id) {
@@ -67,6 +74,10 @@ export default {
         }
         return item;
       })
+    },
+    // Ma'lumotlarni o'chirish funksiyasi
+    onDeleteHandler(id) {
+      this.movies = this.movies.filter(item => item.id !== id)
     },
   },
 }
