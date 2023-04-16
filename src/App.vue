@@ -36,18 +36,21 @@ export default {
           view: 787,
           favorite: true,
           like: true,
+          id: 1,
         },
         {
           name: 'Titanic',
           view: 145,
           favorite: true,
           like: false,
+          id: 2,
         },
         {
           name: 'Avatar',
           view: 511,
           favorite: true,
           like: true,
+          id: 3,
         },
       ]
     }

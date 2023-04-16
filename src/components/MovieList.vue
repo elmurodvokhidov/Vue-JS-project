@@ -1,6 +1,6 @@
 <template>
     <ul class="list-group movieList">
-        <MovieItem v-for="(item, index) in movies" :key="index" v-bind:property="item" />
+        <MovieItem v-for="(item, index) in movies" :key="item.id" v-bind:property="item" />
     </ul>
 </template>
 <script>

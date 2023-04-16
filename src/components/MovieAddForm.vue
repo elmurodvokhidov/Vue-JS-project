@@ -25,6 +25,7 @@ export default {
                 view: this.view,
                 favorite: false,
                 like: false,
+                id: Date.now(),
             }
             this.$emit('createItem', newItem)
             this.name = ''
