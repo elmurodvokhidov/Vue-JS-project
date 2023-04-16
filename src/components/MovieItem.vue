@@ -1,10 +1,12 @@
 <template>
     <li class="list-group-item d-flex justify-content-between"
         :class="[{ like: property.like }, { favorite: property.favorite }]">
-        <span @click="onLike" class="list-group-item-label">{{ property.name }}</span>
+        <span @click="$emit('onToggle', { id: property.id, prop: 'like' })" class="list-group-item-label">{{ property.name
+        }}</span>
         <input type="text" class="list-group-item-input" :value="property.view">
         <div class="d-flex justify-content-center align-items-center">
-            <button class="btn-cookie btn-sm" type="button"><i class="fas fa-cookie"></i></button>
+            <button @click="$emit('onToggle', { id: property.id, prop: 'favorite' })" class="btn-cookie btn-sm"
+                type="button"><i class="fas fa-cookie"></i></button>
             <button class="btn-trash btn-sm" type="button"><i class="fas fa-trash"></i></button>
             <i class="fas fa-star"></i>
         </div>
