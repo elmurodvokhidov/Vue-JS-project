@@ -1,7 +1,7 @@
 <template>
     <li class="list-group-item d-flex justify-content-between"
         :class="[{ like: property.like }, { favorite: property.favorite }]">
-        <span class="list-group-item-label">{{ property.name }}</span>
+        <span @click="onLike" class="list-group-item-label">{{ property.name }}</span>
         <input type="text" class="list-group-item-input" :value="property.view">
         <div class="d-flex justify-content-center align-items-center">
             <button class="btn-cookie btn-sm" type="button"><i class="fas fa-cookie"></i></button>
@@ -17,7 +17,12 @@ export default {
             type: Object,
             required: true,
         }
-    }
+    },
+    methods: {
+        onLike() {
+            this.$emit('onLike', this.property.id)
+        }
+    },
 }
 </script>
 <style scoped>
