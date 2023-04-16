@@ -4,10 +4,11 @@
       <AppInfo :barchaKinolar="movies.length" :watchedMovies="movies.filter(item => item.favorite).length" />
       <div class="searchPanel">
         <SearchPanel :updTermHandler="updTermHandler" />
-        <AppFilter />
+        <AppFilter :updFilterHandler="updFilterHandler" :filterName="filter" />
       </div>
       <!-- Movie List componenti va undagi propslar -->
-      <MovieList :movies="onSearchHandler(movies, term)" @onToggle="onToggleHandler" @onDelete="onDeleteHandler" />
+      <MovieList :movies="onFilter(onSearchHandler(movies, term), filter)" @onToggle="onToggleHandler"
+        @onDelete="onDeleteHandler" />
       <!-- Movie Add Form componenti va undagi propslar -->
       <MovieAddForm @createItem="createItem" />
     </div>
@@ -60,6 +61,7 @@ export default {
       ],
       // Search inputdan keladigan qiymatni saqlovchi storage
       term: '',
+      filter: 'all',
     }
   },
 
@@ -91,6 +93,20 @@ export default {
     updTermHandler(term) {
       this.term = term
     },
+    // Filter funksiyasi
+    onFilter(arr, filter) {
+      switch (filter) {
+        case 'popular':
+          return arr.filter(item => item.like)
+        case 'mostView':
+          return arr.filter(item => item.view > 200)
+        default:
+          return arr
+      }
+    },
+    updFilterHandler(filter) {
+      this.filter = filter
+    }
   },
 }
 </script>
