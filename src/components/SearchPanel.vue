@@ -1,8 +1,10 @@
 <template>
-    <input @input="changeHandler" :value="term" class="form-control searchInput" type="text" name="search" id="search"
-        placeholder="Kinolarni qidirish">
+    <Input v-model="term" @input="changeHandler" class="searchInput" name="search" id="search"
+        placeholder="Kinolarni qidirish"></Input>
 </template>
 <script>
+import Input from '../ui/Input.vue';
+
 export default {
     props: {
         updTermHandler: {
@@ -12,15 +14,16 @@ export default {
     },
     data() {
         return {
-            term: '',
-        }
+            term: "",
+        };
     },
     methods: {
         changeHandler(e) {
-            this.term = e.target.value
-            this.updTermHandler(this.term)
+            this.term = e.target.value;
+            this.updTermHandler(this.term);
         }
     },
+    components: { Input },
 }
 </script>
 <style scoped>

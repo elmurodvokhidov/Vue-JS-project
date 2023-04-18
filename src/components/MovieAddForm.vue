@@ -2,10 +2,12 @@
     <Box class="movieAddForm">
         <h3>Yangi kino qo'shish</h3>
         <form action="#" class="d-flex addForm" @submit.prevent>
-            <input type="text" class="form-control newMovie" name="newMovie" id="newMovie" placeholder="Qanday kino?"
-                :value="name" @input="name = $event.target.value">
-            <input type="number" class="form-control newMovie" name="newMovie1" id="newMovie1"
-                placeholder="Necha marta ko'rilgan?" :value="view" @input="view = $event.target.value">
+            <!-- Birinchi input || Kino nomi -->
+            <Input class="newMovie" name="newMovie" id="newMovie" placeholder="Qanday kino?" v-model="name"></Input>
+            <!-- Ikkinchi input || Ko'rilgan soni -->
+            <Input type="number" class="newMovie" name="newMovie1" id="newMovie1" placeholder="Necha marta ko'rilgan?"
+                v-model="view"></Input>
+            <!-- Qo'shish tugmasi -->
             <PrimaryBtn class="btn-outline-dark" type="button" @click="addItem">Qo'shish</PrimaryBtn>
         </form>
     </Box>
@@ -13,10 +15,13 @@
 <script>
 import PrimaryBtn from "@/ui/PrimaryBtn.vue";
 import Box from "../ui/Box.vue";
+import Input from "../ui/Input.vue";
+
 export default {
     components: {
         PrimaryBtn,
         Box,
+        Input,
     },
     data() {
         return {
