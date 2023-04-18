@@ -22,6 +22,7 @@ import SearchPanel from "@/components/SearchPanel.vue";
 import AppFilter from "@/components/AppFilter.vue";
 import MovieList from "@/components/MovieList.vue";
 import MovieAddForm from "@/components/MovieAddForm.vue";
+import axios from "axios";
 
 export default {
   // Barcha componentlar
@@ -36,29 +37,7 @@ export default {
   // Barcha ma'lumotlarni saqlab turuvchi storage
   data() {
     return {
-      movies: [
-        {
-          name: 'Man in black',
-          view: 787,
-          favorite: true,
-          like: true,
-          id: 1,
-        },
-        {
-          name: 'Titanic',
-          view: 145,
-          favorite: true,
-          like: false,
-          id: 2,
-        },
-        {
-          name: 'Avatar',
-          view: 511,
-          favorite: true,
-          like: true,
-          id: 3,
-        },
-      ],
+      movies: [],
       // Search inputdan keladigan qiymatni saqlovchi storage
       term: '',
       filter: 'all',
@@ -106,7 +85,26 @@ export default {
     },
     updFilterHandler(filter) {
       this.filter = filter
-    }
+    },
+    // API 'dan ma'lumot olish funksiyasi
+    async fetchMovie() {
+      try {
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        const newArr = data.map(i => ({
+          id: i.id,
+          name: i.title,
+          view: i.id * 15,
+          like: false,
+          favorite: false,
+        }))
+        this.movies = newArr;
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+  },
+  mounted() {
+    this.fetchMovie();
   },
 }
 </script>
