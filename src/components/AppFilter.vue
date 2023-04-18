@@ -1,12 +1,13 @@
 <template>
     <div class="btn-group">
-        <button v-for="item in filterBtn" :key="item.name" class="btn"
+        <PrimaryBtn v-for="item in filterBtn" :key="item.name"
             :class="[filterName === item.name ? 'btn-dark' : 'btn-outline-dark']" @click="filterHandler(item.name)">{{
                 item.title
-            }}</button>
+            }}</PrimaryBtn>
     </div>
 </template>
 <script>
+import PrimaryBtn from "@/ui/PrimaryBtn.vue";
 export default {
     props: {
         updFilterHandler: {
@@ -17,6 +18,9 @@ export default {
             type: String,
             required: true,
         }
+    },
+    components: {
+        PrimaryBtn,
     },
     data() {
         return {

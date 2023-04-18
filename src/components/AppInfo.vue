@@ -1,11 +1,12 @@
 <template>
-    <div class="appInfo">
+    <Box class="appInfo">
         <p class="fs-3 text-uppercase">Barcha kinolar soni: {{ barchaKinolar }}</p>
         <p class="fs-4 text-uppercase">Ko'rilgan kinolar soni: {{ watchedMovies }}</p>
-    </div>
+    </Box>
 </template>
 
 <script>
+import Box from "@/ui/Box.vue";
 export default {
     props: {
         barchaKinolar: {
@@ -16,15 +17,11 @@ export default {
             type: Number,
             required: true,
         }
-    }
+    },
+    components: {
+        Box,
+    },
 }
 </script>
 
-<style scoped>
-.appInfo {
-    padding: 1.5rem;
-    border-radius: 4px;
-    background-color: #fcfaf4;
-    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.15);
-}
-</style>
+<style scoped></style>
