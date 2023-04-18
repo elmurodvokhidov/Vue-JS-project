@@ -6,8 +6,14 @@
         <SearchPanel :updTermHandler="updTermHandler" />
         <AppFilter :updFilterHandler="updFilterHandler" :filterName="filter" />
       </div>
+      <!-- Hech qanday ma'lumot topilmadi -->
+      <Box v-if="!movies.length && !isLoading" class="text-danger">Hech qanday ma'lumot topilmadi!</Box>
+      <!-- Loader -->
+      <Box v-else-if="isLoading" class="text-center">
+        <Loader></Loader>
+      </Box>
       <!-- Movie List componenti va undagi propslar -->
-      <MovieList :movies="onFilter(onSearchHandler(movies, term), filter)" @onToggle="onToggleHandler"
+      <MovieList v-else :movies="onFilter(onSearchHandler(movies, term), filter)" @onToggle="onToggleHandler"
         @onDelete="onDeleteHandler" />
       <!-- Movie Add Form componenti va undagi propslar -->
       <MovieAddForm @createItem="createItem" />
@@ -23,6 +29,8 @@ import AppFilter from "@/components/AppFilter.vue";
 import MovieList from "@/components/MovieList.vue";
 import MovieAddForm from "@/components/MovieAddForm.vue";
 import axios from "axios";
+import Box from "./ui/Box.vue";
+import Loader from "./ui/Loader.vue";
 
 export default {
   // Barcha componentlar
@@ -32,6 +40,8 @@ export default {
     AppFilter,
     MovieList,
     MovieAddForm,
+    Box,
+    Loader,
   },
 
   // Barcha ma'lumotlarni saqlab turuvchi storage
@@ -41,6 +51,7 @@ export default {
       // Search inputdan keladigan qiymatni saqlovchi storage
       term: '',
       filter: 'all',
+      isLoading: false,
     }
   },
 
@@ -89,7 +100,8 @@ export default {
     // API 'dan ma'lumot olish funksiyasi
     async fetchMovie() {
       try {
-        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        this.isLoading = true;
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=5');
         const newArr = data.map(i => ({
           id: i.id,
           name: i.title,
@@ -100,9 +112,12 @@ export default {
         this.movies = newArr;
       } catch (error) {
         alert(error.message);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
+  // User saytga kirgan payt API'dan ma'lumot oladigan funksiyani ishlatadigan metod
   mounted() {
     this.fetchMovie();
   },
